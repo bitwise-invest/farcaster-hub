@@ -12,7 +12,7 @@ Each step has a Makefile-based version (simpler) or the equivalent manual comman
 
 1. [Install docker](https://docs.docker.com/install/) and start the Docker daemon (by opening Docker Desktop)
 2. [Install Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-3. Make sure you have the AWS CLI installed on your machine. You can check by running `aws --version`
+3. Make sure you have the AWS CLI installed on your machine. You can check by running `aws --version`. Make sure you have a profile setup by running `aws configure`
 4. Clone this repo: `git clone https://github.com/bitwise-invest/farcaster-hub.git` and enter the folder `cd farcaster-hub`
 
 # 1. Run Hub Locally (optional - the Merkle instructions don't talk about running locally)
