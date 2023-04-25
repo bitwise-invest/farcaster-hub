@@ -1,8 +1,7 @@
 APPLICATION_NAME ?= hubble
-REGION ?= us-east-1
 
 login: 
-		aws ecr get-login-password --region ${REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com
+		aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com
 
 create_repo:
 		aws ecr create-repository --repository-name ${APPLICATION_NAME} --image-scanning-configuration scanOnPush=true
