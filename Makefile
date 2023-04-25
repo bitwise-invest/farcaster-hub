@@ -1,10 +1,10 @@
 APPLICATION_NAME ?= hubble
 
 login: 
-		aws ecr get-login-password | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com
+		aws ecr get-login-password --AWS_REGION ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
 create_repo:
-		aws ecr create-repository --repository-name ${APPLICATION_NAME} --image-scanning-configuration scanOnPush=true
+		aws ecr create-repository --AWS_REGION ${AWS_REGION} --repository-name ${APPLICATION_NAME} --image-scanning-configuration scanOnPush=true
 
 build_local:
 		docker build --build-arg ALCHEMY_GOERLI_URL=${ALCHEMY_GOERLI_URL} --build-arg HUBBLE_PEERS=${HUBBLE_PEERS} --tag ${APPLICATION_NAME} .
@@ -18,9 +18,9 @@ build:
 		docker build --platform linux/amd64 --build-arg ALCHEMY_GOERLI_URL=${ALCHEMY_GOERLI_URL} --build-arg HUBBLE_PEERS=${HUBBLE_PEERS} -t ${APPLICATION_NAME} .
 
 tag:
-		docker tag ${APPLICATION_NAME} ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${APPLICATION_NAME}:latest
+		docker tag ${APPLICATION_NAME} ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${APPLICATION_NAME}:latest
 
 push:
-		docker push ${AWS_ACCOUNT_ID}.dkr.ecr.us-east-1.amazonaws.com/${APPLICATION_NAME}:latest
+		docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${APPLICATION_NAME}:latest
 
 docker_build_and_push: login build tag push

@@ -166,9 +166,9 @@ resource "aws_instance" "hub_instance" {
               sudo apt-get install -y docker-ce docker-ce-cli containerd.io
               sudo systemctl start docker
               sudo apt-get install awscli -y
-              aws ecr get-login-password --region us-east-1 | sudo docker login --username AWS --password-stdin ${data.aws_caller_identity.current.account_id}.dkr.ecr.us-east-1.amazonaws.com
-              sudo docker pull ${data.aws_caller_identity.current.account_id}.dkr.ecr.us-east-1.amazonaws.com/hubble:latest # Replace with the name of your Docker image
-              sudo docker run -p 2282:2282 -p 2283:2283 -d ${data.aws_caller_identity.current.account_id}.dkr.ecr.us-east-1.amazonaws.com/hubble:latest # Add any additional flags or options you need for your container
+              aws ecr get-login-password --region ${var.aws_region} | sudo docker login --username AWS --password-stdin ${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com
+              sudo docker pull ${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/hubble:latest # Replace with the name of your Docker image
+              sudo docker run -p 2282:2282 -p 2283:2283 -d ${data.aws_caller_identity.current.account_id}.dkr.ecr.${var.aws_region}.amazonaws.com/hubble:latest # Add any additional flags or options you need for your container
               EOF
 
   root_block_device {

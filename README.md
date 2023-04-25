@@ -28,6 +28,7 @@ If you want, you can execute these [manually](#run-locally---manual-commands)
 ```
 export ALCHEMY_GOERLI_URL={INSERT_ALCHEMY_URL}
 export AWS_ACCOUNT_ID={INSERT_AWS_ACCOUNT_ID}
+export AWS_REGION={INSERT_REGION} // Example region is "us-west-1"
 ```
 
 If you want to run testnet:
