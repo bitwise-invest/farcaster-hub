@@ -28,6 +28,9 @@ RUN chmod +x /app/apps/hubble/start.sh
 # Create an identity
 RUN cd apps/hubble/ && yarn identity create
 
+# Reset DB
+RUN yarn dbreset
+
 # Expose the required ports
 EXPOSE 2282
 

@@ -144,7 +144,7 @@ resource "aws_iam_instance_profile" "ec2_instance_profile" {
 }
 
 resource "aws_instance" "hub_instance" {
-  ami           = "ami-007855ac798b5175e" # This is the Ubuntu Server 22.04 LTS 64-bit (x86) AMI ID
+  ami           = "${var.aws_ec2_ami_id}" # This is the Ubuntu Server 22.04 LTS 64-bit (x86) AMI ID
   availability_zone = "${var.aws_availability_zone}"
   instance_type = "m5.large"
   associate_public_ip_address = false
