@@ -34,6 +34,23 @@ resource "aws_subnet" "subnet_1" {
   map_public_ip_on_launch = true
 }
 
+resource "aws_route_table" "route_table" {
+  vpc_id = "${aws_vpc.vpc_1.id}"
+  route {
+      cidr_block = "0.0.0.0/0"
+      gateway_id = "${aws_internet_gateway.internet_gateway_1.id}"
+  }
+
+  tags = {
+    Name = "hub_igw_route-table"
+  }
+}
+
+resource "aws_route_table_association" "subnet-association" {
+  subnet_id      = "${aws_subnet.subnet_1.id}"
+  route_table_id = "${aws_route_table.route_table.id}"
+}
+
 resource "aws_security_group" "hub_security_group" {
   name        = "launch-wizard"
   description = "launch-wizard created 2023-04-14T20:55:05.027Z"
@@ -142,6 +159,11 @@ resource "aws_iam_role" "ec2_instance_role" {
 # Attach an IAM policy to the role that allows access to ECR repositories
 resource "aws_iam_role_policy_attachment" "ecr_access_policy" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
+  role       = aws_iam_role.ec2_instance_role.name
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_instance_connect" {
+  policy_arn = "arn:aws:iam::aws:policy/EC2InstanceConnect"
   role       = aws_iam_role.ec2_instance_role.name
 }
 
