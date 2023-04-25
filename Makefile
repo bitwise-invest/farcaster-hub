@@ -1,10 +1,10 @@
 APPLICATION_NAME ?= hubble
 
 login: 
-		aws ecr get-login-password --AWS_REGION ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
+		aws ecr get-login-password --region ${AWS_REGION} | docker login --username AWS --password-stdin ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com
 
 create_repo:
-		aws ecr create-repository --AWS_REGION ${AWS_REGION} --repository-name ${APPLICATION_NAME} --image-scanning-configuration scanOnPush=true
+		aws ecr create-repository --region ${AWS_REGION} --repository-name ${APPLICATION_NAME} --image-scanning-configuration scanOnPush=true
 
 build_local:
 		docker build --build-arg ALCHEMY_GOERLI_URL=${ALCHEMY_GOERLI_URL} --build-arg HUBBLE_PEERS=${HUBBLE_PEERS} --tag ${APPLICATION_NAME} .

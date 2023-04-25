@@ -19,6 +19,14 @@ resource "aws_vpc" "vpc_1" {
   cidr_block = "172.31.0.0/16"
 }
 
+resource "aws_internet_gateway" "internet_gateway_1" {
+  vpc_id = aws_vpc.vpc_1.id
+
+  # tags = {
+  #   Name = ""
+  # }
+}
+
 resource "aws_subnet" "subnet_1" {
   vpc_id                  = aws_vpc.vpc_1.id
   cidr_block              = "172.31.0.0/20"
