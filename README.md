@@ -34,10 +34,12 @@ export AWS_REGION={INSERT_REGION} // Example region is "us-west-1"
 If you want to run testnet:
 ```
 export HUBBLE_PEERS=/dns/testnet1.farcaster.xyz/tcp/2282
+export HUBBLE_NETWORK=2
 ```
 or mainnet:
 ```
-export HUBBLE_PEERS=/dns/hoyt.farcaster.xyz/tcp/2282
+export HUBBLE_PEERS=/dns/nemes.farcaster.xyz/tcp/2282
+export HUBBLE_NETWORK=1
 ```
 
 NOTE: To move to mainnet, you'll want to run through these instructions for testnet first and make sure you're syncing. Read this before trying mainnet: https://warpcast.notion.site/warpcast/Mainnet-Hubs-dc2ff6d528f64992afe03797b61dec32
